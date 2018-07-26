@@ -1,0 +1,90 @@
+﻿@model Mantenimiento.Models.Empleado
+
+@{
+    ViewBag.Title = Model.nombre + " " + Model.apellido;
+
+}
+<br />
+
+
+<ol class="breadcrumb">
+    <li><a href="~/">Empleados </a> </li>
+    <li class="active">@(" " +Model.nombre + " " + Model.apellido)</li>
+</ol>
+<div class="panel panel-default">
+    <div class="panel-heading"> Informacion Personal</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>Nombre</dt>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+            <dt>Apellido</dt>
+            <dd>
+                @Html.DisplayFor(model => model.apellido)
+            </dd>
+            <dt>Dui</dt>
+            <dd>
+                @Html.DisplayFor(model => model.dui)
+            </dd>
+            <dt>Direccion</dt>
+            <dd>
+                @Html.DisplayFor(model => model.direccion)
+            </dd>
+            <dt>Telefono</dt>
+            <dd>
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
+            <dt>Fecha</dt>
+            <dd>
+                @Html.DisplayFor(model => model.fechaIngreso)
+            </dd>
+            <dt>Salario</dt>
+            <dd>
+                @Html.DisplayFor(model => model.salario)
+            </dd>
+           
+        </dl>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Oficina</th>
+                    <th>Descripcion</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(mode => Model.Oficina.nombreofi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mode => Model.Oficina.descripcion)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mode => Model.Oficina.direccion)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mode => Model.Oficina.telefono)
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Editar", new { id = Model.idempleado }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

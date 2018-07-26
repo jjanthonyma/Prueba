@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmpresaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="idempleado" />
+    </Key>
+    <Property Name="idempleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dui" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="fechaIngreso" Type="DateTime" Precision="0" />
+    <Property Name="salario" Type="Double" />
+    <Property Name="idoficina" Type="Int32" />
+    <NavigationProperty Name="Oficina" Relationship="Self.FK_Empleado_Oficina" FromRole="Empleado" ToRole="Oficina" />
+  </EntityType>
+  <EntityType Name="Oficina">
+    <Key>
+      <PropertyRef Name="idoficina" />
+    </Key>
+    <Property Name="idoficina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="nombreofi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleadoes" Relationship="Self.FK_Empleado_Oficina" FromRole="Oficina" ToRole="Empleado" />
+  </EntityType>
+  <Association Name="FK_Empleado_Oficina">
+    <End Role="Oficina" Type="Self.Oficina" Multiplicity="0..1" />
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oficina">
+        <PropertyRef Name="idoficina" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="idoficina" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmpresaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
+    <EntitySet Name="Oficinas" EntityType="Self.Oficina" />
+    <AssociationSet Name="FK_Empleado_Oficina" Association="Self.FK_Empleado_Oficina">
+      <End Role="Oficina" EntitySet="Oficinas" />
+      <End Role="Empleado" EntitySet="Empleadoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

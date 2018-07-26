@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Mantenimiento.Models.Empleado>
+
+@{
+    ViewBag.Title = "Lista de Empleados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Empleados</h2>
+
+<p>
+    <a class="btn  btn-primary" href="~/Empleado/Agregar">Agregar</a>
+    <a class="btn  btn-primary" href="~/Oficina/Index">Lista de Oficinas</a>
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            Nombre
+        </th>
+        <th>
+            Apellido
+        </th>
+
+        <th>
+            DUI
+        </th>
+        <th>
+            Direccion
+        </th>
+        <th>
+            Telefono
+        </th>
+        <th>
+            Fecha de Ingreso
+        </th>
+        <th>
+            Salario
+        </th>
+        <th>
+            Oficina
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dui)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+        <td>
+
+            @Html.DisplayFor(modelItem => item.fechaIngreso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.salario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idoficina)
+        </td>
+       
+        <td><a class="btn btn-xs  btn-default" href="~/Empleado/Editar/@item.idempleado">Editar</a> <a class="btn btn-xs  btn-primary" href="~/Empleado/Detalles/@item.idempleado">Ver</a> <a onclick="return confirm('Desea Eliminar este registro?');" class="btn btn-xs btn-warning" href="~/Empleado/eliminar/@item.idempleado">Eliminar</a></td>
+
+    </tr>
+
+}
+
+</table>
